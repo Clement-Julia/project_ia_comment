@@ -1,8 +1,14 @@
 from flask import Flask, render_template, request, jsonify
 import requests
+from flask_toastr import Toastr
+
+from pprint import pprint
+
+pprint(globals())
+pprint(locals())
 
 app = Flask(__name__)
-url_api = "http://127.0.0.1:5000"
+url_api = "http://127.0.0.1:5000/predict_sentiment"
 
 @app.route('/')
 def accueil():
@@ -19,17 +25,16 @@ def check_commentaire():
     response = requests.post(url_api, json=data)
 
     if response.status_code == 200:
+        
         reponse_api = response.json()
-        validation = reponse_api['validation']
+        if reponse_api == 0: resultat = "neg"
+        elif reponse_api == 1: resultat = "pos"
+        else : resultat = "neu"
 
-        if validation:
-            resultat = "Le commentaire est positif !"
-        else:
-            resultat = "Le commentaire est négatif."
     else:
         resultat = "Erreur lors de la requête à l'API."
 
-    return jsonify({'resultat': resultat})
+    return render_template('comment.html', resultat_api=resultat)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="localhost", port="5001")
