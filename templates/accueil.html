@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Accueil{% endblock %}
 {% block content %}
-
-<p>Bienvenue sur notre application de vérification de commentaires.</p>
-<a href="/comment" class="btn btn-outline-primary">Vérifier un commentaire</a>
-
+<div class="d-flex justify-content-center">
+    <a href="/comment" class="btn btn__valo btn__valo--blue me-3 text-decoration-none">
+        <span class="btn__inner">
+            <span class="btn__slide__blue"></span>
+            <span class="btn__content"><i class="fa-solid fa-shield-halved fa-xl me-2"></i>Vérifier un commentaire</span>
+        </span>
+    </a>
+</div>
 {% endblock %}

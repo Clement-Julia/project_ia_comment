@@ -39,9 +39,6 @@ body {
     transform: translateZ(0);
     will-change: transform;
 }
-.bg-image1 {
-    background-image: url(../images/fond1.jpg);
-}
 .bg-bleuAzur {
     background-color: #2a74db;
     border-color: #236fda;
@@ -60,6 +57,9 @@ body {
 }
 .bg-violetTwitchLight {
     background-color: #8c59eb;
+}
+.redVif {
+    color: #ac1f1f;
 }
 .txtStyle1 {
     font-weight: 400;
@@ -90,26 +90,34 @@ footer {
     bottom: 0;
     left: 0;
 }
+
 /* ------------------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------ PAGE GLOBAL ----------------------------------------------------- */
+/* ----------------------------------------------------- PAGE COMMENT ----------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------------------------------ */
+.bg-gradGreen {
+    background-image: radial-gradient( circle farthest-corner at 10% 20%, #5dfe60 0%, #28d1ab 90% );
+}
+.cl-gradGreen {
+    color: #5DFE62;
+}
+.bg-gradRed {
+    background-image: url(../images/red1.jpg);
+}
+.cl-gradRed {
+    color: #ac1f1f;
+}
+.bg-gradBlue {
+    background-image: url(../images/blue1.jpg);
+}
+.cl-gradBlue {
+    color: #4AA8D2;
+}
+
 .cardStats {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #fff;
-}
-.divSpace {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.divGraphs {
-    width: 100%;
-}
-.divGraphsRow {
-    display: flex;
-    justify-content: space-evenly;
 }
 .card-header {
     border-top-right-radius: 1rem !important;
@@ -123,93 +131,18 @@ footer {
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
 }
-/* -------------------- SWITCH -------------------- */
-.switch-container {
-    display: flex;
-    align-items: center;
-    padding: 0;
-}
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 24px;
-}
-.switch input { 
-    display:none;
-}
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /*background-color: #FC7307;*/
-    background-color: #6441a5;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-.slider.round {
-    border-radius: 34px;
-}
-.slider.round:before {
-    border-radius: 50%;
-}
-input:checked + .slider {
-    background-color: #6441a5;
-}
-input:focus + .slider {
-    box-shadow: 0 0 1px #6441a5;
-}
-input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
-
-.form-control:focus {
-    color: #212529;
-    background-color: #fff;
-    border-color: #86b7fe;
-    outline: 0;
-    box-shadow: 0 0 0 0.1rem rgba(13,110,253,.25);
-}
-/* ------------------------------------------------------------------------------------------------------------------------ */
-/* -------------------------------------------------------- PAGE JEUX ----------------------------------------------------- */
-/* ------------------------------------------------------------------------------------------------------------------------ */
-
-.graphRow {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-end;
-}
-@media (max-width: 1399px) {
-    #year-form {
-        margin-top: 1.6rem;
-    }
-}
-.divDatatable {
-    width: 91%;
-    text-align: center;
-}
 
 /* ------------------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------ PAGE ACCUEIL ---------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------------------------------ */
-
+.titrePage {
+    color: #d7d7d7;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-left: 12px;
+}
 :root {
 	--background-color: #0f1923;
     --button-text-color: var(--background-color);
@@ -341,18 +274,6 @@ input:checked + .slider:before {
 	transition: all 0.2s ease;
 }
 
-.btn__slide__red {
-	display: block;
-	position: absolute;
-	top: 0;
-	bottom: -1px;
-	left: -8px;
-	width: 0;
-	background-color: var(--highlight-color-red);
-	transform: skew(-15deg);
-	transition: all 0.2s ease;
-}
-
 .btn__slide__blue {
 	display: block;
 	position: absolute;
@@ -361,18 +282,6 @@ input:checked + .slider:before {
 	left: -8px;
 	width: 0;
 	background-color: var(--highlight-color-blue);
-	transform: skew(-15deg);
-	transition: all 0.2s ease;
-}
-
-.btn__slide__purple {
-	display: block;
-	position: absolute;
-	top: 0;
-	bottom: -1px;
-	left: -8px;
-	width: 0;
-	background-color: var(--highlight-color-purple);
 	transform: skew(-15deg);
 	transition: all 0.2s ease;
 }
@@ -387,9 +296,7 @@ input:checked + .slider:before {
 
 .btn__valo:hover .btn__slide,
 .btn__valo:hover .btn__slide__green,
-.btn__valo:hover .btn__slide__red, 
-.btn__valo:hover .btn__slide__blue,
-.btn__valo:hover .btn__slide__purple {
+.btn__valo:hover .btn__slide__blue {
 	width: calc(100% + 15px);
 }
 
@@ -405,26 +312,10 @@ input:checked + .slider:before {
 	--button-bits-color-hover: #ece8e1;
 }
 
-.btn__valo--red {
-	--button-background-color: var(--background-color);
-	--button-text-color: var(--highlight-color-red);
-	--button-inner-border-color: var(--highlight-color-red);
-	--button-text-color-hover: #ece8e1;
-	--button-bits-color-hover: #ece8e1;
-}
-
 .btn__valo--blue {
 	--button-background-color: var(--background-color);
 	--button-text-color: var(--highlight-color-blue);
 	--button-inner-border-color: var(--highlight-color-blue);
-	--button-text-color-hover: #ece8e1;
-	--button-bits-color-hover: #ece8e1;
-}
-
-.btn__valo--purple {
-	--button-background-color: var(--background-color);
-	--button-text-color: var(--highlight-color-purple);
-	--button-inner-border-color: var(--highlight-color-purple);
 	--button-text-color-hover: #ece8e1;
 	--button-bits-color-hover: #ece8e1;
 }
@@ -506,15 +397,6 @@ html {
 	color: var(--bs-btn-hover-color);
 	background-color: var(--bs-btn-hover-bg);
 	border-color: var(--bs-btn-hover-border-color);
-}
-
-.card-stats {
-    background-color: #fff;
-    border-radius: 10px;
-    border: none;
-    position: relative;
-    margin-bottom: 30px;
-    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
 }
 .l-bg-cherry {
     background: linear-gradient(to right, #493240, #f09) !important;
