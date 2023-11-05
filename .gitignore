@@ -1,4 +1,5 @@
 data/train_dl.csv
+notebook/jigsaw.csv
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
