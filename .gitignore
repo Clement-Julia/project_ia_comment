@@ -1,4 +1,4 @@
-data/train_dl.csv
+data/*
 notebook/jigsaw.csv
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,12 +1,7 @@
-import os
 import pandas as pd
 import numpy as np
-import string
 import spacy
 import re
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
-from sklearn.utils import class_weight
 import tensorflow as tf
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
@@ -50,8 +45,7 @@ def prediction_toxicity(model, comment):
     comment_padded = pad_sequences(comment_sequence, maxlen=max_sequence_length, padding='post')
 
     predictions = model.predict(comment_padded)
-    class_labels = [1, 0]
-    predicted_class = class_labels[np.argmax(predictions)]
+    predicted_class = np.argmax(predictions)
 
     return predicted_class, predictions
 
@@ -63,8 +57,7 @@ def get_toxicity(comment):
         comment = GoogleTranslator(source='auto', target='en').translate(comment)
         comment = preprocess_text(comment)
 
-        predicted_class, predictions = prediction_toxicity(model, comment)
-        print(f"{toxic_var} : {predicted_class} : {predictions}")
+        predicted_class = prediction_toxicity(model, comment)
         toxic_score = toxic_score + predicted_class
     
     return toxic_score
