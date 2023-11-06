@@ -14,7 +14,7 @@
                 <button type="submit" class="btn btn-outline-primary ms-2">Vérifier</button>
             </div>
         </form>
-        <span id="score"></span>
+        <!-- <span id="score"></span> -->
     </div>
 </div>
 
@@ -36,25 +36,27 @@
 {% block script %}
 {{ super () }}
 <script>
-    var score = "{{ score }}";
+    var resultat = "{{ resultat }}";
     var body = document.querySelector("body");
     var titre = document.getElementById("titleColor");
     var scoreElement = document.getElementById("score");
-    var cardStats = document.getElementById("cardStats");
+    // var cardStats = document.getElementById("cardStats");
 
-    if (score > 0) {
-        toastr.error("Le commentaire est toxique ! <br>Score : " + score + " / 4");
+    if (resultat == 2) {
+        toastr.info("Le commentaire est indeterminé.");
+        body.classList.add("bg-gradBlue");
+        titre.classList.add("cl-gradBlue");
+    } else if (resultat == 1) {
+        toastr.error("Le commentaire est toxique !");
         body.classList.add("bg-gradRed");
         titre.classList.add("cl-gradRed");
-    } else if (score === 0) {
+    } else if (resultat == 3) {
         toastr.success("Le commentaire n'est pas toxique.");
         body.classList.add("bg-gradGreen");
         titre.classList.add("cl-gradGreen");
-    } else {
-        body.classList.add("bg-gradBlue");
-        titre.classList.add("cl-gradBlue");
     }
 
+    /*
     scoreElement.textContent = "Score : " + score + " / 4";
     if (score == 0) {
         cardStats.classList.remove("pb-2");
@@ -71,5 +73,6 @@
         });
         loadingModal.show();
     }
+    */
 </script>
 {% endblock %}
