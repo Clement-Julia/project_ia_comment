@@ -24,12 +24,11 @@ def check_commentaire():
     if response.status_code == 200:
         reponse_api = response.json()
         # score = reponse_api['score'];
-        resultat = reponse_api
-
+        resultat = reponse_api + 1
     else:
         resultat = "Erreur lors de la requête à l'API."
 
-    return render_template('comment.html', score=resultat)
+    return render_template('comment.html', resultat=resultat)
 
 if __name__ == '__main__':
     app.run(debug=True, host="localhost", port="5001")
