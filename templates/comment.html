@@ -4,25 +4,30 @@
 
 <div class="card-body py-0 px-5">
     <div class="card-header bg-dark p-3 m-0 d-flex justify-content-between align-items-center">
-        <h5 class="card-title text-white m-0">Poster un nouveau commentaire</h5>
+        <h5 class="card-title m-0" id="titleColor">Poster un nouveau commentaire</h5>
     </div>
 
-    <div class="cardStats p-3">
-        <form method="post" action="/check_commentaire">
+    <div id="cardStats" class="cardStats p-3">
+        <form method="post" action="/check_commentaire" onsubmit="showLoadingModal()">
             <div class="d-flex">
                 <textarea name="comment" id="comment" class="form-control" rows="6" cols="160" required></textarea>
-                <button type="submit" class="btn btn-outline-primary ms-2">Submit</button>
+                <button type="submit" class="btn btn-outline-primary ms-2">Vérifier</button>
             </div>
         </form>
-    
-        <div id="result">
-            {% if result %}
-                {% if result == "positive" %}
-                    <p>Positive comment!</p>
-                {% else %}
-                    <p>Negative comment.</p>
-                {% endif %}
-            {% endif %}
+        <span id="score"></span>
+    </div>
+</div>
+
+<!-- Modal de chargement -->
+<div class="modal" id="loadingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center bg-black text-white rounded-3">
+                <p>Chargement en cours...</p>
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Chargement...</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -31,8 +36,40 @@
 {% block script %}
 {{ super () }}
 <script>
-    $(document).ready(function () {
-        $('#example').DataTable();
-    });
+    var score = "{{ score }}";
+    var body = document.querySelector("body");
+    var titre = document.getElementById("titleColor");
+    var scoreElement = document.getElementById("score");
+    var cardStats = document.getElementById("cardStats");
+
+    if (score > 0) {
+        toastr.error("Le commentaire est toxique ! <br>Score : " + score + " / 4");
+        body.classList.add("bg-gradRed");
+        titre.classList.add("cl-gradRed");
+    } else if (score === 0) {
+        toastr.success("Le commentaire n'est pas toxique.");
+        body.classList.add("bg-gradGreen");
+        titre.classList.add("cl-gradGreen");
+    } else {
+        body.classList.add("bg-gradBlue");
+        titre.classList.add("cl-gradBlue");
+    }
+
+    scoreElement.textContent = "Score : " + score + " / 4";
+    if (score == 0) {
+        cardStats.classList.remove("pb-2");
+        scoreElement.style.display = "none";
+    } 
+    else {
+        cardStats.classList.add("pb-2");
+    }
+
+    function showLoadingModal() {
+        var loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'), {
+            backdrop: 'static',
+            keyboard: false
+        });
+        loadingModal.show();
+    }
 </script>
 {% endblock %}
