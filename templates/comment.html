@@ -21,20 +21,19 @@
 {% block script %}
 {{ super () }}
 <script>
-    var resultatAPI = "{{ resultat_api }}";
+    var score = "{{ score }}";
     var body = document.querySelector("body");
     var titre = document.getElementById("titleColor");
 
-    if (resultatAPI === "pos") {
-        toastr.success("Le commentaire est positif !");
-        body.classList.add("bg-gradGreen");
-        titre.classList.add("cl-gradGreen");
-    } else if (resultatAPI === "neg") {
-        toastr.error("Le commentaire est négatif.");
+    if (score > 0) {
+        toastr.error("Le commentaire est toxique ! Score : " + score + " / 4");
         body.classList.add("bg-gradRed");
         titre.classList.add("cl-gradRed");
-    } else if (resultatAPI === "neu") {
-        toastr.info("Le commentaire est neutre.");
+    } else if (score === 0) {
+        toastr.success("Le commentaire n'est pas toxique.");
+        body.classList.add("bg-gradGreen");
+        titre.classList.add("cl-gradGreen");
+    } else {
         body.classList.add("bg-gradBlue");
         titre.classList.add("cl-gradBlue");
     }
