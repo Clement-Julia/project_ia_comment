@@ -4,26 +4,16 @@
 
 <div class="card-body py-0 px-5">
     <div class="card-header bg-dark p-3 m-0 d-flex justify-content-between align-items-center">
-        <h5 class="card-title text-white m-0">Poster un nouveau commentaire</h5>
+        <h5 class="card-title m-0" id="titleColor">Poster un nouveau commentaire</h5>
     </div>
 
     <div class="cardStats p-3">
         <form method="post" action="/check_commentaire">
             <div class="d-flex">
                 <textarea name="comment" id="comment" class="form-control" rows="6" cols="160" required></textarea>
-                <button type="submit" class="btn btn-outline-primary ms-2">Submit</button>
+                <button type="submit" class="btn btn-outline-primary ms-2">Vérifier</button>
             </div>
         </form>
-    
-        <div id="result">
-            {% if result %}
-                {% if result == "positive" %}
-                    <p>Positive comment!</p>
-                {% else %}
-                    <p>Negative comment.</p>
-                {% endif %}
-            {% endif %}
-        </div>
     </div>
 </div>
 {% endblock %}
@@ -31,8 +21,21 @@
 {% block script %}
 {{ super () }}
 <script>
-    $(document).ready(function () {
-        $('#example').DataTable();
-    });
+    var score = "{{ score }}";
+    var body = document.querySelector("body");
+    var titre = document.getElementById("titleColor");
+
+    if (score > 0) {
+        toastr.error("Le commentaire est toxique ! Score : " + score + " / 4");
+        body.classList.add("bg-gradRed");
+        titre.classList.add("cl-gradRed");
+    } else if (score === 0) {
+        toastr.success("Le commentaire n'est pas toxique.");
+        body.classList.add("bg-gradGreen");
+        titre.classList.add("cl-gradGreen");
+    } else {
+        body.classList.add("bg-gradBlue");
+        titre.classList.add("cl-gradBlue");
+    }
 </script>
 {% endblock %}
