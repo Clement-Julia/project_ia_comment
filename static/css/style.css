@@ -61,6 +61,15 @@ body {
 .redVif {
     color: #ac1f1f;
 }
+.roseChair {
+    color: #ce8bb7;
+}
+.noirHaine {
+    color: #000;
+}
+.toxicGreen {
+    color: #53c124;
+}
 .txtStyle1 {
     font-weight: 400;
     letter-spacing: .2px;
@@ -139,9 +148,24 @@ footer {
     color: #d7d7d7;
     font-weight: 400;
     letter-spacing: 1.5px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     text-align: center;
     margin-left: 12px;
+}
+.card-header-acc {
+    display: flex;
+}
+.card-body-acc {
+    background-color: #ece8e1;
+    color: #212529;
+    padding: 1rem;
+}
+.titreAccueil {
+    font-size: 2rem;
+}
+.texteAccueil {
+    font-size: 1.2rem;
+    text-align: center;
 }
 :root {
 	--background-color: #0f1923;

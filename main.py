@@ -25,16 +25,14 @@ def check_commentaire():
     response = requests.post(url_api, json=data)
 
     if response.status_code == 200:
-        
         reponse_api = response.json()
-        if reponse_api == 0: resultat = "neg"
-        elif reponse_api == 1: resultat = "pos"
-        else : resultat = "neu"
+        score = reponse_api['score'];
+        resultat = score
 
     else:
         resultat = "Erreur lors de la requête à l'API."
 
-    return render_template('comment.html', resultat_api=resultat)
+    return render_template('comment.html', score=resultat)
 
 if __name__ == '__main__':
     app.run(debug=True, host="localhost", port="5001")
